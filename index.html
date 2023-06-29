@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="ExcelKode.">
+    <meta name="keywords" content="barcode, ExcelKode, excel, sheet">
+    <meta name="author" content="mario">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ExcelKode</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-3"><a class="btn btn-link text-secondary p-0" href="" title="Barcode">
+                <span><img id="logo" src="assets/images/scan.svg" alt="Link" width="80" height="80"></span>
+            </a>ExcelKode</h1>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div id="forms" class="rounded shadow p-5 bg-white">
+        <div class="row">
+            <div class="col-md-3 mb-3 mb-md-0 text-center">
+                <i class="ti-paint-bucket text-primary h1"></i>
+                <h3 class="mt-4 text-capitalize h5"><i class="bi bi-1-square"></i> Selectionner votre fichier excel</h3>
+                <p class="regular text-muted"></p>
+                <form id="fileForm" enctype="multipart/form-data">
+                    <fieldset class="form-group">
+                        <div class="form-group">
+                            <input id="uploadedFile" class="uploadedFile form-control-file" type=file name="file" accept=".xls,.xlsx" aria-describedby="fileHelp">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0 text-center">
+                <i class="ti-shine text-primary h1"></i>
+                <h3 class="mt-4 text-capitalize h5"><i class="bi bi-2-square"></i> Taille etiquettes</h3>
+                <div class="form-group">
+                    <div class="custom-controls-stacked">
+                        <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="height" value="1" onchange="SetStickerSize(this.value)">
+                            <div class="custom-control-label">1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </label>
+                        <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="height" value="16" onchange="SetStickerSize(this.value)">
+                            <div class="custom-control-label">16&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </label>
+                        <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="height" value="33" onchange="SetStickerSize(this.value)" checked>
+                            <div class="custom-control-label">33&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0 text-center">
+                <i class="ti-shine text-primary h1"></i>
+                <h3 class="mt-4 text-capitalize h5"><i class="bi bi-3-square"></i> Taille du code barre</h3>
+                <div class="form-group">
+                    <div class="custom-controls-stacked">
+                        <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="height" value="15" onchange="SetBarcodeHeight(this.value)">
+                            <div class="custom-control-label">15px</div>
+                        </label>
+                        <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="height" value="35" onchange="SetBarcodeHeight(this.value)" checked>
+                            <div class="custom-control-label">35px</div>
+                        </label>
+                        <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="height" value="100" onchange="SetBarcodeHeight(this.value)">
+                            <div class="custom-control-label">100px</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0 text-center">
+                <i class="ti-thought text-primary h1"></i>
+                <h3 class="mt-4 text-capitalize h5 "><i class="bi bi-4-square"></i> Imprimer</h3>
+                <button type="button" class="btn btn-primary btn-lg btn-lg-bg" onclick="window.print();">Imprimer</button>
+            </div>
+        </div>
+    </div>
+    <hr id="noprint">
+    <div class="results">
+        <div id="grid">
+            <div class="title text-center">
+                <h1 id="printTitle" class="printTitle"></h1>
+            </div>
+            <div class="table">
+                <table id="excelDataTable" class="table table-bordered"></table>
+            </div>
+            <div class="date text-center">
+                <span id="date"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="border-top">
+    <div class="text-center pt-3 pt-lg-4">
+        <h3 class="font-weight-light">ExcelKode</h3>
+        <div class="font-size-ms text-muted text-center">
+            Made by
+            <a class="text-muted" href="https://github.com/Mario-35/" target="_blank">mario</a>
+            on
+            <a class="text-muted" href="https://github.com/KyriakosGian/Barcode-List-From-Excel" target="_blank">GitHub</a>
+        </div>
+    </div>
+</footer>
+<script src="assets/js/xlsx.full.min.js"></script>
+<script src="assets/js/JsBarcode.all.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

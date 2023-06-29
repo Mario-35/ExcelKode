@@ -1,0 +1,83 @@
+@media print {
+    @page {
+        size: A4 portrait;
+    }
+
+    * {
+        color: #000 !important;
+        text-shadow: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        zoom: .98;
+    }
+
+    table {
+        border-collapse: collapse !important;
+        margin: 0;
+    }
+
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid !important;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    #header {
+        display: none;
+    }
+
+    #forms {
+        display: none;
+    }
+
+    #message {
+        display: none;
+    }
+
+    #noprint {
+        display: none;
+    }
+
+    footer {
+        display: none;
+    }
+}
+
+img#logo {
+    padding-bottom: 12px;
+}
+
+input#uploadedFile {
+    padding: 1em;
+}
+
+.printTitle {
+    font-weight: bold;
+}
+
+.form-control-lg {
+    text-align: center;
+}
+
+.btn-lg-bg {
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 10px 50px;
+}
+
+th {
+    text-align: center;
+    text-decoration: underline;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle !important;
+}
