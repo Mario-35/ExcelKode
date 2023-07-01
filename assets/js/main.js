@@ -1,23 +1,9 @@
-let _format = {};
-
-SetStickerSize(33);
-//Name the list title 
-const typeHandler = function (e) {
-    document.getElementById('printTitle').innerHTML = e.target.value;
-    localStorage.setItem('Title', e.target.value); //Save Title to localStorage
-}
-
-//Add date to bottom
-document.getElementById('date').innerHTML = Date();
-
 //Excel barcode functions
 const uploadedFile = document.getElementById('uploadedFile');
-const excelDataTable = document.getElementById('excelDataTable');
 
 uploadedFile.addEventListener('change', handleFileSelect, false);
 
 function handleFileSelect(evt) {
-    excelDataTable.innerHTML = "";
     const files = evt.target.files;
     const xl2json = new ExcelToJSON();
     xl2json.parseExcel(files[0]);
@@ -33,126 +19,107 @@ class ExcelToJSON {
             workbook.SheetNames.forEach((sheetName) => {
                 const XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
                 const json_object = JSON.stringify(XL_row_object);
-                buildHtmlTable(JSON.parse(json_object), 'excelDataTable');
+                buildSticker(JSON.parse(json_object));
                 JsBarcode(".barcode").init();
             });
         };
 
         reader.onerror = (ex) => console.log(ex);
-
         reader.readAsBinaryString(file);
     }
 }
 
 // Builds the HTML Table out of myList.
-function buildHtmlTable(myList, selector) {
-    const table = document.getElementById(selector);
-    for (let i = 0; i < myList.filter(e => e["Année"]).length; i += _format.step) {
-        const row = table.insertRow(-1);
-        for (let j = 0; j < _format.step; j ++) {
-            const cell = row.insertCell(-1);
-            CreateCard(myList[i+j], cell);
-        }
+function buildSticker(myList) {
+    const size = getStickerSize();;
+    const page = document.getElementById("page");
+    while (page.firstChild) {
+        page.removeChild(page.firstChild);
     }
+    const cards = document.createElement('div');
+    cards.classList.add("cards");
+    
+    for (let i = 0; i < myList.filter(e => e["Année"]).length; i++) {
+        const newCard = document.createElement('div');
+        newCard.setAttribute("style",`width: ${size.width}cm; height: ${size.height}cm; font-size: ${size.font}px;`);
+
+        // newCard.className = `card${nb}`;
+        CreateCard(myList[i], newCard);
+        cards.appendChild(newCard);
+    }
+    page.appendChild(cards);
 }
 
+function CreateblankCard(input, to) {
+    var content = document.createElement('div');
+    content.classList.add("blank");
+    content.innerHTML = `<svg class="barcode" jsbarcode-value="${input["Code Barre"]}" jsbarcode-flat="true" jsbarcode-fontSize="12" jsbarcode-height="35" jsbarcode-width="1"</svg>`;
+
+    to.appendChild(content);
+}
+  
 function CreateCard(input, to) {
-    var table = document.createElement('table');
-    table.style.width = `"${_format.width}%"`; 
-    table.style.height = `"${_format.height}%"`; 
-    var tr1 = table.insertRow(-1);  
-    var td1 = document.createElement('td');
-    td1.style.width = "25%"; 
-    var td2 = document.createElement('td');
-    td2.style.width = "50%"; 
-    td2.rowSpan = "4";
-    var td3 = document.createElement('td');
-    td3.style.width = "25%"; 
-    
-        var text1 = document.createTextNode(input["N°échantillon"] || "");        
-        var text3 = document.createTextNode(input["Libellé libre"] || "");
-        
-        td1.appendChild(text1);
-        td2.innerHTML = `<svg class="barcode" jsbarcode-value="${input["Code Barre"]}" jsbarcode-height="35" jsbarcode-width="2"</svg>`;
-        td3.appendChild(text3);
-        tr1.appendChild(td1);
-        tr1.appendChild(td2);
-        tr1.appendChild(td3);
 
-        table.appendChild(tr1);
+    var content = document.createElement('div');
+    content.classList.add("AnotherFlexWrapper");
+    var col1 = document.createElement('div');
+    col1.classList.add("FlexItems");
+    col1.classList.add("FlexSideOne");
+    col1.innerHTML= `
+    <table class="tableCard">
+    <tr>
+      <td class="truncate">${input["N°échantillon"] || "&nmsp;"}</td>
+    </tr>
+    <tr>
+      <td class="truncate">${input["Année"] || "&nmsp;"}</td>
+    </tr>
+    <tr>
+      <td class="truncate">${input["Site"] || "&nmsp;"}</td>
+    </tr>
+  </table>  
+    `;
+    content.appendChild(col1);
+    var col2 = document.createElement('div');
+    col2.classList.add("FlexItems");
+    col2.classList.add("FlexContent");
+    col2.innerHTML = `<svg class="barcode" jsbarcode-value="${input["Code Barre"]}" jsbarcode-flat="true" jsbarcode-fontSize="12" jsbarcode-height="35" jsbarcode-width="1"</svg>`;
 
-
-
-        var tr2 = table.insertRow(-1);
-        var td21 = document.createElement('td');
-        var td22 = document.createElement('td');
-        var text21 = document.createTextNode(input["Année"] || "");
-        var text22 = document.createTextNode('');
-        td21.appendChild(text21);
-        td22.appendChild(text22);
-        tr2.appendChild(td21);
-        tr2.appendChild(td22);
-        table.appendChild(tr2);
-
-        var tr3 = table.insertRow(-1);
-        var td31 = document.createElement('td');
-        var td32 = document.createElement('td');
-        var text31 = document.createTextNode(input["Site"] || "");
-        var text32 = document.createTextNode('');
-        td31.appendChild(text31);
-        td32.appendChild(text32);
-        tr3.appendChild(td31);
-        tr3.appendChild(td32);
-        table.appendChild(tr3);
-
-        var tr4 = table.insertRow(-1);
-        var td41 = document.createElement('td');
-        var td42 = document.createElement('td');
-        var text41 = document.createTextNode(input["Scientifique"] || "");
-        var text42 = document.createTextNode(input["Péremption"] || "");
-        td41.appendChild(text41);
-        td42.appendChild(text42);
-        tr4.appendChild(td41);
-        tr4.appendChild(td42);
-        table.appendChild(tr4);
+    content.appendChild(col2);
+    var col3 = document.createElement('div');
+    col3.classList.add("FlexItems");
+    col3.classList.add("FlexSideTwo");
+    col3.innerHTML= `
+    <table class="tableCard">
+    <tr colZspan= "3">
+      <td class="truncate">${input["Scientifique"] || "&nmsp;"}</td>
+    </tr>
+    <tr>
+      <td class="truncate">${input["Péremption"] || "&nmsp;"}</td>
+    </tr>
+  </table>  
+    `;
+    content.appendChild(col3);
+    var col4 = document.createElement('div');
+    col4.classList.add("FlexItems");
+    col4.classList.add("FlexFooter");
+    col4.innerHTML= `
+    <table class="tableCard">
+    <tr>
+      <td class="truncate">${input["Libellé libre"] || "&nmsp;"}</td>
+    </tr>
+  </table>  
+    `;
+    content.appendChild(col4);
 
 
-    to.appendChild(table);
+
+    to.appendChild(content);
 }
 
-function cmToPx(input) {
-    return +input / 0.026458;
-}
-
-function pxToCm(input) {
-    return +input * 0.026458;
-}
-
-function SetStickerSize(template) {
-    switch (+template) {
-        case 33:
-            _format = {
-                height : 9,
-                step : 3,
-                width : 33,
-            };            
-            break;
-            case 16:
-                _format = {
-                    height : 12,
-                    step : 2,
-                    width : 50,
-            };            
-            break;
-    
-        default:
-            _format = {
-                height : 40,
-                step : 1,
-                width : 40,
-            };
-            break;
-    }
+function getStickerNb() {
+    if (document.getElementById("radio-1").checked) return 1;
+    if (document.getElementById("radio-16").checked) return 16;
+    if (document.getElementById("radio-33").checked) return 33;
 }
 
 function SetBarcodeHeight(height) {
@@ -162,4 +129,36 @@ function SetBarcodeHeight(height) {
         currentElements.setAttribute('jsbarcode-height', height);
     }
     JsBarcode(".barcode").init();
+}
+
+
+function getStickerSize() {
+    let nb = 33;
+    if (document.getElementById("radio-1").checked) nb = 1;
+    if (document.getElementById("radio-16").checked) nb = 16;
+    if (document.getElementById("radio-33").checked) nb = 33;
+
+    switch (nb) {
+        case 33:
+            return {
+                width: 7,
+                height: 2.5,
+                font: 12,
+                nbColumn: 3
+            };
+            case 16:
+                return {
+                    width: 10.5,
+                    height: 3.7,
+                    font: 12,
+                    nbColumn: 2
+                };
+                default:
+                    return {
+                        width: 7,
+                        height: 2.5,
+                        font: 12,
+                        nbColumn: 1
+            };
+    }
 }

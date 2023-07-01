@@ -12,21 +12,7 @@
     }
 
     table {
-        border-collapse: collapse !important;
         margin: 0;
-    }
-
-    table {
-        page-break-inside: auto
-    }
-
-    tr {
-        page-break-inside: avoid !important;
-        page-break-after: auto
-    }
-
-    thead {
-        display: table-header-group
     }
 
     #header {
@@ -50,34 +36,194 @@
     }
 }
 
-img#logo {
-    padding-bottom: 12px;
+.paddingBlock {
+	padding: 20px 0;
 }
 
-input#uploadedFile {
-    padding: 1em;
+.eqWrap {
+	display: flex;
 }
 
-.printTitle {
-    font-weight: bold;
+.eq {
+	padding: 10px;
 }
 
-.form-control-lg {
-    text-align: center;
+
+.InlineFlex {
+    background-color: indigo;
+    color: #ddd;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .Footer {
+    background-color: #ebebeb;
+    padding: 0.5rem;
+  }
+  
+  .AnotherFlexWrapper {
+    display: flex;
+    /* flex-direction: column; */
+  }
+  .AnotherFlexWrapper .FlexItems {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.5em 0 -0.5em;
+    
+  }
+  .AnotherFlexWrapper .FlexHeader {
+    order: 1;
+  }
+  .AnotherFlexWrapper .FlexSideOne {
+    order: 3;
+  }
+  .AnotherFlexWrapper .FlexSideTwo {
+    order: 4;
+  }
+  .AnotherFlexWrapper .FlexFooter {
+    order: 5;
+  }
+  .AnotherFlexWrapper .FlexContent {
+    order: 2;
+  }
+  
+  @media (min-width: 40rem) {
+    .AnotherFlexWrapper {
+      flex-flow: row wrap;
+    }
+    .AnotherFlexWrapper .FlexHeader {
+      width: 100%;
+    }
+    .AnotherFlexWrapper .FlexContent {
+      flex: 1;
+      order: 3;
+    }
+    .AnotherFlexWrapper .FlexSideOne {
+      width: 29%;
+      order: 2;
+    }
+    .AnotherFlexWrapper .FlexSideTwo {
+      width: 29%;
+      order: 4;
+    }
+    .AnotherFlexWrapper .FlexFooter {
+      width: 100%;
+    }
+  }
+  @media (min-width: 31.5rem) {
+    .MenuWrap {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+    }
+  
+    .ListItem {
+      margin-right: 1rem;
+    }
+  
+    .LastItem {
+      margin-left: auto;
+    }
+  }
+  
+  .page {  
+    width: 21cm;
 }
 
-.btn-lg-bg {
-    color: #fff;
-    border: 1px solid #fff;
-    padding: 10px 50px;
+.cards {
+    display:flex;
+    flex-wrap: wrap;
+    align-items:center;
 }
 
-th {
-    text-align: center;
-    text-decoration: underline;
+.card33 {
+    width: 7cm;
+    height: 2.5cm;
+    font-size: 12px;
+}
+.card16 {
+    width: 10.5cm;
+    height: 3.7cm;
 }
 
-td {
-    text-align: center;
-    vertical-align: middle !important;
+.blank {
+    background-color: aqua;
+    border-color: black;
+    border: 1px;
 }
+/* 
+  .col-1 {
+    flex-basis: decimal-floor(8.3333333333%, 10);
+    max-width: decimal-floor(8.3333333333%, 10);
+}
+
+.col-2 {
+    flex-basis: decimal-floor(16.6666666667%, 10);
+    max-width: decimal-floor(16.6666666667%, 10);
+}
+
+.col-3 {
+    flex-basis: decimal-floor(25%, 10);
+    max-width: decimal-floor(25%, 10);
+}
+
+.col-4 {
+    flex-basis: decimal-floor(33.3333333333%, 10);
+    max-width: decimal-floor(33.3333333333%, 10);
+}
+
+.col-5 {
+    flex-basis: decimal-floor(41.6666666667%, 10);
+    max-width: decimal-floor(41.6666666667%, 10);
+}
+
+.col-6 {
+    flex-basis: decimal-floor(50%, 10);
+    max-width: decimal-floor(50%, 10);
+}
+
+.col-7 {
+    flex-basis: decimal-floor(58.3333333333%, 10);
+    max-width: decimal-floor(58.3333333333%, 10);
+}
+
+.col-8 {
+    flex-basis: decimal-floor(66.6666666667%, 10);
+    max-width: decimal-floor(66.6666666667%, 10);
+}
+
+.col-9 {
+    flex-basis: decimal-floor(75%, 10);
+    max-width: decimal-floor(75%, 10);
+}
+
+.col-10 {
+    flex-basis: decimal-floor(83.3333333333%, 10);
+    max-width: decimal-floor(83.3333333333%, 10);
+}
+
+.col-11 {
+    flex-basis: decimal-floor(91.6666666667%, 10);
+    max-width: decimal-floor(91.6666666667%, 10);
+}
+
+.col-12 {
+    flex-basis: decimal-floor(100%, 10);
+    max-width: decimal-floor(100%, 10);
+}
+
+
+.cards {
+    display:flex;
+    flex-wrap: wrap;
+    align-items:center;
+}
+  
+
+
+.content {
+	display: flex;
+} */
