@@ -12,9 +12,34 @@
     
     <body>
     <div id="noprint" class="container">
-        <p><img id="logo" src="assets/images/scan.svg" alt="Link" width="80" height="80"> <a href="https://github.com/Mario-35/ExcelKode" class="InlineFlex">ExcelKode</a>.</ p>
+        <div class="equalHMWrap eqWrap">
+            <div class="equalHM eq">
+                <p>
+                    <img id="logo" src="assets/images/scan.svg" alt="Link" width="80" height="80"> 
+                    <a href="https://github.com/Mario-35/ExcelKode" class="InlineFlex">ExcelKode</a>
+                </p>
+            </div>
+            <div class="equalHM eq">
+                <h1>Taille etiquettes</h1>
+                    <input type="radio" id="radio-1" name="notaswitch-1" value="1")>
+                    <label for="radio-1">1</label>
+                    <input type="radio" id="radio-16" name="notaswitch-1" value="16")>
+                    <label for="radio-16">16</label>
+                    <input type="radio" id="radio-33" name="notaswitch-1" value="33") checked>
+                    <label for="radio-33">33</label>
+            </div>
+            <div class="equalHM eq">
+                <h1>Taille du code barre</h1>
+                    <input type="radio" id="radio-15" name="notaswitch-2" value="15px" onchange="SetBarcodeHeight(this.value)">
+                    <label for="radio-15">15px</label>
+                    <input type="radio" id="radio-35" name="notaswitch-2" value="35px" onchange="SetBarcodeHeight(this.value)">
+                    <label for="radio-35">35px</label>
+                    <input type="radio" id="radio-100" name="notaswitch-2" value="100px" onchange="SetBarcodeHeight(this.value)" checked>
+                    <label for="radio-100">100px</label>
+            </div>
 
-        <div id="noprint" class="equalHMWrap eqWrap">
+        </div>
+        <div class="equalHMWrap eqWrap">
             <div class="equalHM eq">
                 <form id="fileForm" enctype="multipart/form-data">
                     <fieldset class="form-group">
@@ -26,26 +51,50 @@
                 </form>         
             </div>
             <div class="equalHM eq">
-                <h1>Taille etiquettes</h1>
-                <div class="regular-field">
-                    <input type="radio" id="radio-1" name="notaswitch-1" value="1")>
-                    <label for="radio-1">1</label>
-                    <input type="radio" id="radio-16" name="notaswitch-1" value="16")>
-                    <label for="radio-16">16</label>
-                    <input type="radio" id="radio-33" name="notaswitch-1" value="33") checked>
-                    <label for="radio-33">33</label>
-                </div>
-            </div>
-            <div class="equalHM eq">
-                <h1>Taille du code barre</h1>
-                <div class="regular-field">
-                    <input type="radio" id="radio-15" name="notaswitch-2" value="15px" onchange="SetBarcodeHeight(this.value)">
-                    <label for="radio-15">15px</label>
-                    <input type="radio" id="radio-35" name="notaswitch-2" value="35px" onchange="SetBarcodeHeight(this.value)">
-                    <label for="radio-35">35px</label>
-                    <input type="radio" id="radio-100" name="notaswitch-2" value="100px" onchange="SetBarcodeHeight(this.value)" checked>
-                    <label for="radio-100">100px</label>
-                </div>
+                <div style="width: 10.5cm; height: 3.7cm; font-size: 12px;"><div class="AnotherFlexWrapper template"><div class="FlexItems FlexSideOne">
+                    <table class="tableCard">
+                    <tbody><tr>
+                      <td>
+                        <input type="text" id="item1" name="item1" size="10" value="N°échantillon">
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" id="item2" name="item2" size="10" value="Année">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" id="item3" name="item3" size="10" value="Site">
+                        </td>
+                    </tr>
+                  </tbody></table>  
+                    </div>
+                    <div class="FlexItems FlexContent">
+                        <input type="text" id="item4" name="item4" size="25" value="Code Barre">
+                    </div>
+                        <div class="FlexItems FlexSideTwo">
+                    <table class="tableCard">
+                    <tbody><tr colzspan="3">
+                        <td>
+                            <input type="text" id="item5" name="item5" size="10" value="Scientifique">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" id="item6" name="item6" size="10" value="Péremption">
+                        </td>
+                    </tr>
+                  </tbody></table>  
+                    </div><div class="FlexItems FlexFooter">
+                    <table class="tableCard">
+                    <tbody><tr>
+                        <td>
+                            <input type="text" id="item2" name="item2" size="60" value="Libellé libre">
+                        </td>
+                    </tr>
+                  </tbody></table>  
+                    </div></div></div>
             </div>
         </div>
 

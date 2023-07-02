@@ -68,13 +68,13 @@ function CreateCard(input, to) {
     col1.innerHTML= `
     <table class="tableCard">
     <tr>
-      <td class="truncate">${input["N°échantillon"] || "&nmsp;"}</td>
+      <td class="truncate">${input[item1.value] || "&nmsp;"}</td>
     </tr>
     <tr>
-      <td class="truncate">${input["Année"] || "&nmsp;"}</td>
+      <td class="truncate">${input[item2.value] || "&nmsp;"}</td>
     </tr>
     <tr>
-      <td class="truncate">${input["Site"] || "&nmsp;"}</td>
+      <td class="truncate">${input[item3.value] || "&nmsp;"}</td>
     </tr>
   </table>  
     `;
@@ -82,7 +82,7 @@ function CreateCard(input, to) {
     var col2 = document.createElement('div');
     col2.classList.add("FlexItems");
     col2.classList.add("FlexContent");
-    col2.innerHTML = `<svg class="barcode" jsbarcode-value="${input["Code Barre"]}" jsbarcode-flat="true" jsbarcode-fontSize="12" jsbarcode-height="35" jsbarcode-width="1"</svg>`;
+    col2.innerHTML = `<svg class="barcode" jsbarcode-value="${input[item4.value]}" jsbarcode-flat="true" jsbarcode-fontSize="12" jsbarcode-height="35" jsbarcode-width="1"</svg>`;
 
     content.appendChild(col2);
     var col3 = document.createElement('div');
@@ -91,10 +91,10 @@ function CreateCard(input, to) {
     col3.innerHTML= `
     <table class="tableCard">
     <tr colZspan= "3">
-      <td class="truncate">${input["Scientifique"] || "&nmsp;"}</td>
+      <td class="truncate">${input[item5.value] || "&nmsp;"}</td>
     </tr>
     <tr>
-      <td class="truncate">${input["Péremption"] || "&nmsp;"}</td>
+      <td class="truncate">${input[item6.value] || "&nmsp;"}</td>
     </tr>
   </table>  
     `;
