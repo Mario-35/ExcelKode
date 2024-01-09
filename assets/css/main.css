@@ -3,12 +3,21 @@
         size: A4 portrait;
     }
 
+    @page :left {
+      margin-left: 4cm;
+      margin-right: 3cm;
+    }
+    
+    @page :right {
+      margin-left: 3cm;
+      margin-right: 4cm;
+    }
+
     * {
         color: #000 !important;
         text-shadow: none !important;
         background: transparent !important;
         box-shadow: none !important;
-        zoom: .98;
     }
 
     table {
@@ -35,43 +44,31 @@
         display: none;
     }
 }
-
-.paddingBlock {
-	padding: 20px 0;
+ 
+.full {
+  width: 100%;
 }
 
-.eqWrap {
-	display: flex;
+.left {
+  text-align: left;
 }
 
-.eq {
-	padding: 10px;
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
 }
 
 
-.InlineFlex {
-    background-color: indigo;
-    color: #ddd;
-    text-decoration: none;
-    padding: 5px;
-    border-radius: 3px;
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  .Footer {
-    background-color: #ebebeb;
-    padding: 0.5rem;
-  }
-  
   .AnotherFlexWrapper {
     display: flex;
-    /* flex-direction: column; */
   }
   .AnotherFlexWrapper .FlexItems {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -0.5em 0 -0.5em;
+    margin: 0 -0 0 -0;
     
   }
   .AnotherFlexWrapper .FlexHeader {
@@ -82,72 +79,123 @@
   }
   .AnotherFlexWrapper .FlexSideTwo {
     order: 4;
+    text-align: right;
   }
-  .AnotherFlexWrapper .FlexFooter {
+  .AnotherFlexWrapper .FlexFullWidth {
     order: 5;
   }
-  .AnotherFlexWrapper .FlexContent {
+  .AnotherFlexWrapper .FlexCodeBarre {
     order: 2;
   }
   
-  @media (min-width: 40rem) {
     .AnotherFlexWrapper {
       flex-flow: row wrap;
     }
     .AnotherFlexWrapper .FlexHeader {
       width: 100%;
     }
-    .AnotherFlexWrapper .FlexContent {
-      flex: 1;
+    .AnotherFlexWrapper .FlexCodeBarre {
+      width: 31%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       order: 3;
     }
     .AnotherFlexWrapper .FlexSideOne {
-      width: 29%;
+      width: 33%;
       order: 2;
     }
     .AnotherFlexWrapper .FlexSideTwo {
-      width: 29%;
+      width: 33%;
       order: 4;
     }
-    .AnotherFlexWrapper .FlexFooter {
+    .AnotherFlexWrapper .FlexFullWidth {
       width: 100%;
     }
-  }
-  @media (min-width: 31.5rem) {
-    .MenuWrap {
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-    }
-  
-    .ListItem {
-      margin-right: 1rem;
-    }
-  
-    .LastItem {
-      margin-left: auto;
-    }
-  }
-  
-  .page {  
-    width: 21cm;
-}
 
-.cards {
-    display:flex;
-    flex-wrap: wrap;
-    align-items:center;
-}
 
-.blank {
-    background-color: aqua;
-    border-color: black;
-    border: 1px;
-}
+
+
 
 .template {
   /* background-color: aquamarine; */
   border: 1px solid rgba(0, 0, 0, 0.2);
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+}
 
+.classSticker {
+  background-color: rgba(163, 197, 186, 0.973);
+}
+
+.classTemplate {
+  background-color: rgb(216, 255, 175);
+}
+
+.classCb {
+  background-color: rgb(199, 184, 206);
+}
+
+.border {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.stickerCenter{
+ text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  color: #000;
+  width: 100%;
+}
+
+th>.truncate, td>.truncate{
+  width: auto;
+  min-width: 0;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flex-container-outer {
+  height: 10em;
+  display: flex;
+  border: 2px solid black;
+}
+
+.flex-container-label {
+  height: 2em;
+  display: flex;
+  border: 2px solid black;
+}
+
+.flex-item {
+  padding: 1em;
+  text-align: center;
+}
+
+.flex-item-cb {
+  width: 33%;
+  border: 2px solid gray;
+  height: 6em;
+
+  white-space: nowrap;
+
+}
+
+.flex-container-inner {
+  width: 33%;
+  height: 2em;
+
+  /* min-height: inherit; */
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-item-standard {
+  height: 25%;
+  /* overflow: hidden; */
+  white-space: nowrap;
 }

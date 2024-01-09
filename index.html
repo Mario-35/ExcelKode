@@ -1,111 +1,266 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
-    <head>
-        <meta charset="utf-8">
-        <meta name="description" content="ExcelKode.">
-        <meta name="keywords" content="barcode, ExcelKode, excel, sheet">
-        <meta name="author" content="mario">
-        <meta name="viewport" content="initial-scale=1, shrink-to-fit=no">
-        <title>ExcelKode</title>
-        <link rel="stylesheet" href="assets/css/main.css">
-    </head>
-    
-    <body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="ExcelKode.">
+    <meta name="keywords" content="barcode, ExcelKode, excel, sheet">
+    <meta name="author" content="mario">
+    <meta name="viewport" content="initial-scale=1, shrink-to-fit=no">
+    <title>ExcelKode</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/full.min.css">
+  </head>
+  <body>
     <div id="noprint" class="container">
-        <div class="equalHMWrap eqWrap">
-            <div class="equalHM eq">
-                <p>
-                    <img id="logo" src="assets/images/scan.svg" alt="Link" width="80" height="80"> 
-                    <a href="https://github.com/Mario-35/ExcelKode" class="InlineFlex">ExcelKode</a>
-                </p>
-            </div>
-            <div class="equalHM eq">
-                <h1>Taille etiquettes</h1>
-                    <input type="radio" id="radio-1" name="notaswitch-1" value="1")>
-                    <label for="radio-1">1</label>
-                    <input type="radio" id="radio-16" name="notaswitch-1" value="16")>
-                    <label for="radio-16">16</label>
-                    <input type="radio" id="radio-33" name="notaswitch-1" value="33") checked>
-                    <label for="radio-33">33</label>
-            </div>
-            <div class="equalHM eq">
-                <h1>Taille du code barre</h1>
-                    <input type="radio" id="radio-15" name="notaswitch-2" value="15px" onchange="SetBarcodeHeight(this.value)">
-                    <label for="radio-15">15px</label>
-                    <input type="radio" id="radio-35" name="notaswitch-2" value="35px" onchange="SetBarcodeHeight(this.value)">
-                    <label for="radio-35">35px</label>
-                    <input type="radio" id="radio-100" name="notaswitch-2" value="100px" onchange="SetBarcodeHeight(this.value)" checked>
-                    <label for="radio-100">100px</label>
-            </div>
-
+      <div class="patrom-row">
+        <!-- Logo And gabarit -->
+        <div class="patrom-col patrom-col-span-1">
+          <img id="logo" src="assets/images/scan.svg" alt="Link" width="60" height="60">
+          <a href="https://github.com/Mario-35/ExcelKode"><span class="icon-github"></span></a>
+          <br>
+          <select class="patrom-select" name="gabarit" id="gabarit" onchange="refresh()">
+            <option value="">--Selectionner un gabarit--</option>
+            <option value="1">Gabarit 1</option>
+            <option value="16">Gabarit 16</option>
+            <option value="33" selected>Gabarit 33</option>
+          </select>
+          <hr>
+          <div class="field">
+            <input type="file" name="file" id="fileone" class="inputfile inputfile-1"
+                accept=".xls,.xlsx" data-multiple-caption="{count} files selected"
+                multiple />
+            <label id="fileonelabel" for="fileone">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                    <path
+                        d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
+                </svg>
+                <span>Fichier Excel</span>
+            </label>
         </div>
-        <div class="equalHMWrap eqWrap">
-            <div class="equalHM eq">
-                <form id="fileForm" enctype="multipart/form-data">
-                    <fieldset class="form-group">
-                        <h3>Selectionner votre fichier excel</h3>
-                        <div class="form-group">
-                            <input id="uploadedFile" class="uploadedFile form-control-file" type=file name="file" accept=".xls,.xlsx" aria-describedby="fileHelp">
-                        </div>
-                    </fieldset>
-                </form>         
-            </div>
-            <div class="equalHM eq">
-                <div style="width: 10.5cm; height: 3.7cm; font-size: 12px;"><div class="AnotherFlexWrapper template"><div class="FlexItems FlexSideOne">
-                    <table class="tableCard">
-                    <tbody><tr>
-                      <td>
-                        <input type="text" id="item1" name="item1" size="10" value="N°échantillon">
-                      </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" id="item2" name="item2" size="10" value="Année">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" id="item3" name="item3" size="10" value="Site">
-                        </td>
-                    </tr>
-                  </tbody></table>  
-                    </div>
-                    <div class="FlexItems FlexContent">
-                        <input type="text" id="item4" name="item4" size="25" value="Code Barre">
-                    </div>
-                        <div class="FlexItems FlexSideTwo">
-                    <table class="tableCard">
-                    <tbody><tr colzspan="3">
-                        <td>
-                            <input type="text" id="item5" name="item5" size="10" value="Scientifique">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" id="item6" name="item6" size="10" value="Péremption">
-                        </td>
-                    </tr>
-                  </tbody></table>  
-                    </div><div class="FlexItems FlexFooter">
-                    <table class="tableCard">
-                    <tbody><tr>
-                        <td>
-                            <input type="text" id="item2" name="item2" size="60" value="Libellé libre">
-                        </td>
-                    </tr>
-                  </tbody></table>  
-                    </div></div></div>
-            </div>
         </div>
-
-        <div class="equalHM eq"><button type="button" onclick="window.print();">Imprimer</button></div>
-
-        <hr>
-    </div> 
-    <div id="page" class="page"> </div>
+        <div class="patrom-col patrom-col-span-9">
+          <div class="flex-container-outer">
+            <!-- First column  -->
+            <div class="flex-container-inner">
+              <!-- ==================== Item 1 ==================== -->
+              <div class="flex-item flex-item-standard">
+                <div class="patrom-row">
+                  <span tooltip="Taille de la police" flow="left">
+                    <div class="patrom-col patrom-col-span-1">
+                      <input type="number" class="patrom-text-input" id="fontSize1" size="4" value="12">
+                    </div>
+                  </span>
+                  <div class="patrom-col patrom-col-span-10">
+                    <span tooltip="Nom de la colonne Excel" flow="left">
+                      <input type="text" class="patrom-text-input" id="item1" size="10" value="N°échantillon">
+                    </span>
+                  </div>
+                  <div class="patrom-col patrom-col-span-1">
+                    <span tooltip="Génère pas d’étiquette si la valeur est nulle" flow="left">
+                      <label class="patrom-checkbox-labeled">Not Null
+                        <input type="checkbox" id="itemCheck1">
+                        <span class="checkmark"></span>
+                      </label>        
+                      </span>     
+                  </div>
+                </div>
+              </div>
+                <!-- ==================== Item 2 ==================== -->
+              <div class="flex-item flex-item-standard">
+                <div class="patrom-row">
+                  <span tooltip="Taille de la police" flow="left">
+                    <div class="patrom-col patrom-col-span-1">
+                      <input type="number" class="patrom-text-input" id="fontSize2"  size="4" value="12">
+                    </div>
+                  </span>
+                  <div class="patrom-col patrom-col-span-10">
+                    <span tooltip="Nom de la colonne Excel" flow="left">
+                      <input type="text" class="patrom-text-input" id="item2" size="10" value="Année">
+                    </span>
+                  </div>
+                  <div class="patrom-col patrom-col-span-1">
+                    <span tooltip="Génère pas d’étiquette si la valeur est nulle" flow="left">
+                      <label class="patrom-checkbox-labeled">Not Null
+                        <input type="checkbox" id="itemCheck2">
+                        <span class="checkmark"></span>
+                      </label>                        
+                    </span>
+                  </div>
+                </div>
+              </div>
+                <!-- ==================== Item 3 ==================== -->
+              <div class="flex-item flex-item-standard">
+                <div class="patrom-row">
+                  <span tooltip="Taille de la police" flow="left">
+                    <div class="patrom-col patrom-col-span-1">
+                      <input type="number" class="patrom-text-input" id="fontSize3"  size="4" value="12">
+                    </div>
+                  </span>
+                  <div class="patrom-col patrom-col-span-10">
+                    <span tooltip="Nom de la colonne Excel" flow="left">
+                      <input type="text" class="patrom-text-input" id="item3" size="10" value="Scientifique">
+                      </span>
+                  </div>
+                  <div class="patrom-col patrom-col-span-1">
+                    <span tooltip="Génère pas d’étiquette si la valeur est nulle" flow="left">
+                    <label class="patrom-checkbox-labeled">Not Null
+                      <input type="checkbox" id="itemCheck3">
+                      <span class="checkmark"></span>
+                    </label>        
+                  </spon>                
+                  </div>
+                </div>
+              </div>
+                <!-- ==================== Item 3 ==================== -->
+              <div class="flex-item flex-item-standard">
+                <div class="patrom-row">
+                  <span tooltip="Taille de la police" flow="left">
+                    <div class="patrom-col patrom-col-span-1">
+                      <input type="number" class="patrom-text-input" id="fontSize8" name="fontSize8" size="4" value="12">   
+                    </div>
+                  </span>
+                  <div class="patrom-col patrom-col-span-10">
+                    <span tooltip="Nom de la colonne Excel" flow="left">
+                      <input type="text" class="patrom-text-input" id="item8" size="10" value="Libellé libre">
+                      </span>
+                  </div>
+                  <div class="patrom-col patrom-col-span-1">
+                    <span tooltip="Génère pas d’étiquette si la valeur est nulle" flow="left">
+                      <label class="patrom-checkbox-labeled">Not Null
+                        <input type="checkbox" id="itemCheck3">
+                        <span class="checkmark"></span>
+                      </label>                     
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Center DB -->
+            <div class="flex-item flex-item-cb">
+              <span tooltip="Nom de la colonne Excel" flow="left">
+                <input type="text" class="patrom-text-input" id="item4" name="item4" size="25" value="Code Barre">
+              </span>
+              <h4 id="stickerSizeLabel">Taille du code barre : 35</h4>
+              <input id="rs-range-line" type="range" class="patrom-range" min="20" max="55" value="35">
+            </div>
+            <!-- Last and second column -->
+            <div class="flex-container-inner">
+                <!-- ==================== Item 5 ==================== -->
+              <div class="flex-item flex-item-standard">
+                <div class="patrom-row">
+                  <span tooltip="Taille de la police" flow="left">
+                    <div class="patrom-col patrom-col-span-1">
+                      <input type="number" class="patrom-text-input" id="fontSize5"  size="4" value="12">
+                    </div>
+                  </span>
+                  <div class="patrom-col patrom-col-span-10">
+                    <span tooltip="Nom de la colonne Excel" flow="left">
+                      <input type="text" class="patrom-text-input" id="item5" size="10" value="Site">
+                    </span>
+                  </div>
+                  <div class="patrom-col patrom-col-span-1">
+                    <span tooltip="Génère pas d’étiquette si la valeur est nulle" flow="left">
+                      <label class="patrom-checkbox-labeled">Not Null
+                        <input type="checkbox" id="itemCheck5">
+                        <span class="checkmark"></span>
+                      </label>                        
+                    </span>
+                  </div>
+                </div>
+              </div>
+                <!-- ==================== Item 6 ==================== -->
+                <div class="flex-item flex-item-standard">
+                  <div class="patrom-row">
+                    <span tooltip="Taille de la police" flow="left">
+                      <div class="patrom-col patrom-col-span-1">
+                        <input type="number" class="patrom-text-input" id="fontSize6"  size="4" value="12">
+                      </div>
+                    </span>
+                    <div class="patrom-col patrom-col-span-10">
+                      <span tooltip="Nom de la colonne Excel" flow="left">
+                        <input type="text" class="patrom-text-input" id="item6" size="10" value="">
+                      </span>
+                    </div>
+                    <div class="patrom-col patrom-col-span-1">
+                      <span tooltip="Génère pas d’étiquette si la valeur est nulle" flow="left">
+                        <label class="patrom-checkbox-labeled">Not Null
+                          <input type="checkbox" id="itemCheck6">
+                          <span class="checkmark"></span>
+                        </label>                        
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- ==================== Item 7 ==================== -->
+              <div class="flex-item flex-item-standard">
+                <div class="patrom-row">
+                  <span tooltip="Taille de la police" flow="left">
+                    <div class="patrom-col patrom-col-span-1">
+                      <input type="number" class="patrom-text-input" id="fontSize7"  size="4" value="12">
+                    </div>
+                  </span>
+                  <div class="patrom-col patrom-col-span-10">
+                    <span tooltip="Nom de la colonne Excel" flow="left">
+                      <input type="text" class="patrom-text-input" id="item7" size="10" value="Péremption">
+                    </span>
+                  </div>
+                  <div class="patrom-col patrom-col-span-1">
+                    <span tooltip="Génère pas d’étiquette si la valeur est nulle" flow="left">
+                      <label class="patrom-checkbox-labeled">Not Null
+                        <input type="checkbox" id="itemCheck7">
+                        <span class="checkmark"></span>
+                      </label>                        
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-item flex-item-standard">
+                <div class="patrom-row">
+                  <div class="patrom-col patrom-col-span-1 left">
+                    <button type="button" class="patrom-button patrom-button--info" id="generate" onclick="refresh()">Generate</button>      
+                  </div>
+                  <div class="patrom-col patrom-col-span-10 center">
+                    <button type="button" class="patrom-button patrom-button--success" id="print" onclick="window.print();">Imprimer les etiquettes</button>
+                  </div>
+                  <div class="patrom-col patrom-col-span-1">
+                    <label class="patrom-checkbox-labeled">Bordure
+                      <input type="checkbox" id="border" onchange="refresh()">
+                      <span class="checkmark"></span>
+                    </label>  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+        <div class="patrom-col patrom-col-span-1 right">
+          <span tooltip="Change le theme de la page" flow="left">
+            <label class="patrom-switch">
+              <input id="theme" type="checkbox" class="patrom-switch__input" checked>
+              <div class="patrom-switch__theme"></div>
+            </label>
+            </span>
+        </div>
+      </div>
+      <div class="patrom-row">
+        <div class="patrom-col patrom-col-span-12">
+          <span tooltip="filtre : x,x et ou x:z" flow="right">filtre : </span>
+          <input type="text" class="patrom-text-input" id="filter" name="filter" size="100" value="">
+        </div>
+        </div>
+      <hr>
+    </div>
+    
+    <div id="pages" class="page"></div>
+    <script src="assets/css/css.js"></script>
     <script src="assets/js/xlsx.full.min.js"></script>
     <script src="assets/js/JsBarcode.all.min.js"></script>
+    <script src="assets/js/helper/constant.js"></script>
+    <script src="assets/js/helper/clearElementChilds.js"></script>
+    <script src="assets/js/helper/event.js"></script>
+    <script src="assets/js/helper/getElement.js"></script>
+    <script src="assets/js/helper/stickers.js"></script>
     <script src="assets/js/main.js"></script>
-</div>
-</body>
+    </div>
+  </body>
 </html>
